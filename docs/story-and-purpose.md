@@ -10,20 +10,20 @@
 
 ## The Plan
 
-Karim gifts her a small portable device. She receives it with **no explanation** of what it does or who sent it. Inside lives a cute pixel art character. Karim secretly controls the character from his phone over 4G LTE.
+Karim gifts her a small portable device. Inside lives a pixel-art version of **Mai and Karim themselves** — "us in another world." The two characters live, talk, and share little moments inside the device, like a relationship that already exists somewhere.
 
-The character will:
+Karim controls every message from his phone over 4G. The device plays whatever he sends:
 
-- **Talk to her** via TTS (text-to-speech)
-- **Show emotions** through pixel art animations and gestures
-- **Send her messages** as text + audio
-- **Send her photos** Karim picks
-- **Send her videos** Karim records
-- **Send her music** Karim chooses
-- **Greet her** when first powered on
-- **Show its mood** — sleepy when battery low, happy when charging
+- **Voice** — Karim's recordings, or text he typed (server runs TTS to MP3)
+- **Animations and scenes** — pixel art of the two of them, pre-rendered on the server
+- **Photos** Karim picks — the server resizes/processes, the device just displays
+- **Videos** Karim records — the server transcodes to MJPEG, device just plays
+- **Music** Karim chooses
+- **A first-boot greeting** when she powers it on
 
-She doesn't know any of this is from Karim. The device is meant to **charm her over time**. The character becomes a friend, then something more, then she starts wondering who's behind it. Eventually her curiosity and affection grow until she **tells her dad she's interested in the marriage**.
+How fast Karim's name and identity appear is a **content decision he makes per-message**. The device platform itself is neutral — it'll play whatever he sends, named or unnamed, intimate or coy. He could keep it anonymous early to build curiosity, or be open from day one. Up to him, message by message.
+
+The aim: charm her gradually until she **tells her dad she's interested in the marriage**.
 
 That's the win condition.
 
@@ -35,8 +35,8 @@ Karim also wants to know if she's **carrying the device with her** — to uni, t
 
 - **One-way only** until the win condition is met
 - She receives, never sends back
-- She has **no idea** the device is connected to a person
 - After she says yes to marriage: future versions could enable two-way (out of scope)
+- Whether and when Karim is named on screen is a per-message content choice, not a hard system rule
 
 ## Related pages
 

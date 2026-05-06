@@ -13,8 +13,10 @@
 │                  ▼                                                     │
 │   Remote Server (REST API)                                             │
 │       - Stores content queue                                           │
-│       - Generates TTS audio                                            │
-│       - Stores media files                                             │
+│       - Generates TTS audio (MP3)                                      │
+│       - Pre-renders scenes/animations as MJPEG                         │
+│       - Resizes photos to 480x320 JPEG                                 │
+│       - Transcodes videos to MJPEG + separate MP3                      │
 │       - Tracks GPS history & battery level                             │
 │                  ▲                                                     │
 │                  │ HTTPS GET / POST                                    │
@@ -22,12 +24,16 @@
 │                  │                                                     │
 │   ESP32 Device (LILYGO T-SIM A7670E R2)                                │
 │       - Polls server every 5 min while in deep sleep cycle             │
-│       - Downloads new content when present                             │
-│       - Plays content via display + speaker                            │
+│       - Downloads media files when present                             │
+│       - Plays JPEG / MJPEG / MP3 directly (no rendering)               │
 │       - Reports battery + GPS when asked                               │
 │                                                                        │
 └────────────────────────────────────────────────────────────────────────┘
 ```
+
+## Division of Labor (Final)
+
+The ESP32 is intentionally a **dumb media player**. All rendering — text, fonts, scenes, video, photo resizing — happens on the server. The device only knows how to display a JPEG, play an MJPEG, and play an MP3 through I2S. See [content types](content-types.md#architectural-rule-esp32-is-a-dumb-media-player) for why.
 
 ## Why Timer Polling Over SMS Wake-up
 

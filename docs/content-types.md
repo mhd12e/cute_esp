@@ -2,16 +2,26 @@
 
 > Every kind of message Karim can send, how it's stored, and how it plays.
 
+## Architectural Rule: ESP32 is a Dumb Media Player
+
+The device does **no rendering, no font work, no text-to-image, no compositing**. The server pre-renders or transcodes every piece of content into a format the device can play directly. If something appears on screen with text on it, the server baked the text into the JPEG before sending. If something speaks, the server already produced the MP3.
+
+This decision is final. It dramatically simplifies firmware (no font libraries, no text engine, no RTL handling, no on-device TTS) and gives the server full control over visual style.
+
 ## Content Types Karim Can Send
 
-| Type | Format | Storage | Playback |
-|------|--------|---------|----------|
-| **Text message** | UTF-8 string | RAM | Display + TTS |
-| **Animation + text** | Pixel art frame sequence + caption | SD card | Display loop + TTS |
-| **Audio** | MP3 or WAV | SD card | I2S to MAX98357A |
-| **Photo** | JPEG | SD card | Display |
-| **Video** | MJPEG (animated JPEG sequence) | SD card | Display + audio sync |
-| **Music** | MP3 | SD card | I2S to MAX98357A |
+All types arrive at the device as one of three formats: **JPEG**, **MJPEG**, or **MP3**.
+
+| Karim sends | Server produces | Device plays |
+|-------------|-----------------|--------------|
+| **Typed text** | TTS-rendered MP3 (+ optional text-baked JPEG) | I2S audio (+ display image) |
+| **Animation choice** | Pre-rendered MJPEG of pixel-Mai/Karim scene | Display + I2S |
+| **Voice memo / audio** | MP3 (passthrough or filtered) | I2S to MAX98357A |
+| **Photo** | Resized JPEG (480×320) | Display |
+| **Video** | MJPEG transcode + separate MP3 audio track (synced) | Display + I2S |
+| **Music** | MP3 | I2S to MAX98357A |
+
+Language is **English only** — no RTL or multi-script work needed.
 
 ## Why MJPEG for Video
 

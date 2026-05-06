@@ -2,12 +2,19 @@
 
 > Things still to decide. Update this page as decisions land.
 
+## Decided
+
+- [x] **Language: English only.** No RTL, no multi-script. (2026-05-06)
+- [x] **TTS in scope.** One of several content tools, not the only one. (2026-05-06, option B)
+- [x] **Character framing: Mai + Karim themselves, "us in another world."** Pixel-art versions of the two of them. Whether/when his name appears is per-message, not a system rule. (2026-05-06)
+- [x] **Architecture: ESP32 is a dumb media player.** Server pre-renders/transcodes every payload to JPEG / MJPEG / MP3. (2026-05-06)
+
 ## Design
 
-- [ ] **Pixel art character design** — Karim's choice (he said "don't worry about it for now")
-- [ ] **Character name** — does it introduce itself? "Hi, I'm [name]!"
-- [ ] **Character voice** — pick a TTS voice ID for consistency
-- [ ] **Animation library** — how many emotions? (happy, sad, shy, sleepy, excited, etc.)
+- [ ] **Pixel art look for Mai and Karim** — visual style of the two characters
+- [ ] **Mai's voice (TTS)** — voice ID for when "Mai" speaks
+- [ ] **Karim's voice (TTS)** — voice ID for when "Karim" speaks (or just use his recorded voice?)
+- [ ] **Animation library** — what scenes are pre-rendered? (morning routine, walk, cafe, beach, sleepy, etc.)
 - [ ] **Color palette** — pixel art typically uses limited colors; pick a cohesive set
 
 ## Server Choices

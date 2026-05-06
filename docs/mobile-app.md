@@ -6,12 +6,14 @@
 
 ### Home / Send
 
-- Text input with character emotion picker (happy, sad, shy, excited, sleepy)
-- "Send text" button (server generates TTS automatically)
-- Photo picker (gallery or camera)
-- Audio recorder (record voice memo, server runs through cute character voice filter or just plays as-is)
-- Video picker (gallery or camera)
+- Text input with character emotion picker (happy, sad, shy, excited, sleepy) — text goes to server, server runs TTS to MP3 and (optionally) renders a scene MJPEG
+- "Send text" button
+- Photo picker (gallery or camera) — server resizes to 480×320 JPEG
+- Audio recorder (record voice memo, sent as MP3)
+- Video picker (gallery or camera) — server transcodes to MJPEG + separate MP3
 - Music picker (from device's library)
+
+The device never receives raw text. Everything Karim sends is server-prepared into JPEG / MJPEG / MP3 before reaching the device.
 
 ### Status
 
