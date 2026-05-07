@@ -19,21 +19,25 @@ void enterDeepSleep(int seconds) {
     digitalWrite(21, LOW);
 
     // 4. Display sleep mode -- turns off display controller
-    sendDisplayCommand(0x10);              // ILI9488 "Sleep In"
+    sendDisplayCommand(0x10);              // ILI9488 "Sleep In" (CS is hardwired LOW)
 
-    // 5. Modem DTR sleep -- modem keeps network registration but naps
+    // 5. Park display DC HIGH (data mode default), hold through sleep
+    digitalWrite(32, HIGH);
+    gpio_hold_en((gpio_num_t)32);          // GPIO32 IS RTC -- hold persists
+
+    // 6. Modem DTR sleep -- modem keeps network registration but naps
     digitalWrite(MODEM_DTR_PIN, HIGH);     // GPIO25
     gpio_hold_en((gpio_num_t)MODEM_DTR_PIN);
 
-    // 6. Hold critical control pins
+    // 7. Hold critical control pins
     gpio_hold_en((gpio_num_t)BOARD_POWERON_PIN);  // GPIO12 stays HIGH
     gpio_hold_en((gpio_num_t)MODEM_RESET_PIN);    // GPIO5 stays LOW (don't reset)
     gpio_deep_sleep_hold_en();             // persist all RTC holds through deep sleep
 
-    // 7. Configure timer wakeup
+    // 8. Configure timer wakeup
     esp_sleep_enable_timer_wakeup((uint64_t)seconds * 1000000ULL);
 
-    // 8. Goodbye
+    // 9. Goodbye
     esp_deep_sleep_start();
 }
 ```
@@ -54,6 +58,7 @@ void setup() {
     gpio_hold_dis((gpio_num_t)BOARD_POWERON_PIN);
     gpio_hold_dis((gpio_num_t)MODEM_RESET_PIN);
     gpio_hold_dis((gpio_num_t)0);
+    gpio_hold_dis((gpio_num_t)32);     // display DC
 
     // 3. Init UART to modem
     SerialAT.begin(115200, SERIAL_8N1, MODEM_RX_PIN, MODEM_TX_PIN);

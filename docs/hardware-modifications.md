@@ -59,6 +59,16 @@ The A7670 modem can spike to 2A during 4G transmissions. The LiPo can supply thi
 
 Touch is not used. Display pins 9–14 (MISO + 5 touch signals) are left **unconnected**. This frees up pins for other uses but mostly just simplifies the build.
 
+## Mod 6 — Display CS Hardwired to GND
+
+The pin budget is exactly one short of needing CS as a GPIO (see [pin assignment](pin-assignment.md#pin-budget)). Solution: tie display CS (pin 3 of the 14-pin connector) directly to GND with a short jumper.
+
+```
+   Display CS (pin 3) ───── GND
+```
+
+The display is the only device on the VSPI bus (SD card lives on HSPI), so it can stay permanently selected. The ESP32 never needs to deselect it. During deep sleep the display sits in command-`0x10` Sleep In and ignores all input, so noise on SCK/MOSI is not a concern.
+
 ## Related pages
 
 - [Pin assignment](pin-assignment.md) — why GPIO21 specifically

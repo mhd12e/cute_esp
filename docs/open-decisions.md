@@ -6,8 +6,12 @@
 
 - [x] **Language: English only.** No RTL, no multi-script. (2026-05-06)
 - [x] **TTS in scope.** One of several content tools, not the only one. (2026-05-06, option B)
+- [x] **TTS provider: ElevenLabs.** With voice cloning planned for "Karim" voice (he records ~5 min of sample audio at some point). Mai's voice picked from library. (2026-05-07)
 - [x] **Character framing: Mai + Karim themselves, "us in another world."** Pixel-art versions of the two of them. Whether/when his name appears is per-message, not a system rule. (2026-05-06)
 - [x] **Architecture: ESP32 is a dumb media player.** Server pre-renders/transcodes every payload to JPEG / MJPEG / MP3. (2026-05-06)
+- [x] **Server stack: NestJS + Postgres + MinIO + Redis (only if needed).** Self-hosted on a VPS. Delivered end-to-end. (2026-05-07)
+- [x] **Hardware in hand:** LILYGO T-SIM A7670E R2 confirmed (not A7670G), display, MAX98357A, SOTAMIA speaker, 8000mAh LiPo. (2026-05-07)
+- [x] **Pin allocation: 7 of 7 free output GPIOs used.** Display DC on GPIO 32 (newly discovered free), display CS hardwired to GND. GPIO 16/17 confirmed PSRAM-blocked. (2026-05-07)
 
 ## Design
 

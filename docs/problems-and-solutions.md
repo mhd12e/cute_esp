@@ -4,7 +4,7 @@
 
 | # | Problem | Status | Solution | Cost |
 |---|---------|:------:|----------|:----:|
-| 1 | Pin shortage (initially needed 14 GPIOs, only 8 free) | SOLVED | Drop touch (-4) + hardwire RST (-1) + use all 8 free GPIOs | AED 0 |
+| 1 | Pin shortage (initially needed 14 GPIOs) | SOLVED | Drop touch (-4) + hardwire RST (-1) + tie CS to GND (-1) — see #17 below for the deeper PSRAM finding | AED 0 |
 | 2 | Boot pin conflicts | SOLVED | Pin assignment avoids GPIO 2, 12, 15. Uses GPIO0 carefully (RTC + pull-up) | AED 0 |
 | 3 | SPI bus conflict (display vs SD) | SOLVED | Display on VSPI, SD on HSPI — separate hardware buses | AED 0 |
 | 4 | Battery life too short with 18650 | SOLVED | Replace with 8000mAh LiPo (>2× capacity) | AED 45 |
@@ -20,6 +20,8 @@
 | 14 | LiPo over-discharge damages cell | PLANNED | Firmware monitors GPIO35 ADC, force sleep <3.3V | AED 0 |
 | 15 | Modem keeps drawing power between polls | SOLVED | DTR sleep mode (~3mA vs ~20mA awake) | AED 0 |
 | 16 | Battery life initial estimate was wrong | CORRECTED | Re-calculated: ~27 days @ 5 msgs, ~23 days @ 7 msgs | — |
+| 17 | GPIO 16 / 17 are PSRAM (not free) — pin budget short by 1 | SOLVED | Tie display CS directly to GND (display alone on VSPI, no need to deselect); use newly-discovered free GPIO 32 for display DC | AED 0 |
+| 18 | GPIO 32 missing from earlier docs | CORRECTED | Verified on schematic page 3 (PY pin 14); RTC, ADC1, no boot-strap function | — |
 
 **Total extra cost beyond purchased parts:** AED 0–15 (just for optional bulk cap).
 

@@ -16,10 +16,12 @@ if (!SD.begin(BOARD_SD_CS_PIN)) {                           // 13
 // Display on VSPI (separate instance)
 SPIClass *displaySPI = new SPIClass(VSPI);
 displaySPI->begin(18, -1, 23, -1);                          // SCK, MISO, MOSI, CS
-// We pass -1 for MISO (display is write-only) and -1 for CS (we manage CS manually)
+// MISO=-1 because display is write-only.
+// CS=-1 because the display's CS pin is hardwired to GND on the wiring side
+// (display permanently selected). The driver never needs to toggle CS.
 
 // Initialize display driver with the VSPI instance
-TFT_eSPI tft = TFT_eSPI();  // configure User_Setup.h to use VSPI pins
+TFT_eSPI tft = TFT_eSPI();  // configure User_Setup.h to use VSPI pins (SCK=18, MOSI=23, DC=32, no CS)
 // or use Adafruit_ILI9488 with custom SPI: tft.begin(displaySPI);
 ```
 
@@ -108,14 +110,14 @@ modem.sleepEnable(true);
 
 ## Display Sleep/Wake (ILI9488)
 
+CS is hardwired to GND, so we never toggle it. Only DC needs to flip between command and data:
+
 ```c
 // Send a command to ILI9488 (4-wire SPI mode)
 void sendDisplayCommand(uint8_t cmd) {
-    digitalWrite(16, LOW);                   // DC LOW = command mode
-    digitalWrite(17, LOW);                   // CS LOW = select chip
+    digitalWrite(32, LOW);                   // DC LOW = command mode
     displaySPI->transfer(cmd);
-    digitalWrite(17, HIGH);                  // CS HIGH = release
-    digitalWrite(16, HIGH);                  // DC back to data mode
+    digitalWrite(32, HIGH);                  // DC back to data mode
 }
 
 // Sleep In (before deep sleep)

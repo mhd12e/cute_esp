@@ -2,6 +2,14 @@
 
 > Things that would silently break the project if missed. Read before assembling.
 
+## Gotcha: GPIO 16 and 17 are PSRAM, not free
+
+The ESP32-WROVER module on this board uses **GPIO 16 and 17 internally for the embedded 8MB PSRAM** (CS and CLK). They are not broken out to either header (PX or PY). Any guide, screenshot, or marketing pinout that shows them as "free" is misleading.
+
+**Verification:** the board schematic at `lilygo-reference/schematic/esp32/T-A7670X-V1.4.pdf` page 3 shows headers PX and PY in full — neither contains GPIO 16 or 17. The ESP32-WROVER datasheet states explicitly: *"GPIO16 and GPIO17 are used for connecting the embedded PSRAM. They are not recommended for other uses."*
+
+**Why this matters:** earlier drafts of this wiki listed 16 and 17 as free GPIOs. The pin budget assumed an 8-pin allocation across them. The discovery cost us one pin in our budget — we resolved it by tying display CS to GND permanently, but it was a real risk. See [pin assignment](pin-assignment.md#pin-budget) and [problems and solutions](problems-and-solutions.md).
+
 ## Gotcha 1: BOARD_POWERON_PIN (GPIO12) Reset Loop
 
 On battery power, if GPIO12 is not driven HIGH immediately after boot, the board will reset in an endless loop. The very first thing in `setup()` after `Serial.begin()` must be:
@@ -34,10 +42,10 @@ If pull-ups exist: the 10K pull-down still wins for our purposes (4.7K pull-up +
 
 ## Gotcha 5: SPI Initialization with -1 for Unused Pins
 
-When initializing VSPI for the display, we don't use MISO (display write-only) or the default CS pin (we manage CS manually as GPIO17). If we don't pass -1 for unused pins, the SPI driver might claim GPIO 19 (default VSPI MISO) which we use for I2S BCLK.
+When initializing VSPI for the display, we don't use MISO (display is write-only) and we don't use CS (the display's CS pin is hardwired to GND on the wiring side, so the SPI driver never needs to toggle it). If we don't pass -1 for unused pins, the SPI driver might claim GPIO 19 (default VSPI MISO) which we use for I2S BCLK.
 
 ```c
-displaySPI->begin(18, -1, 23, -1);   // SCK, MISO=none, MOSI, CS=manual
+displaySPI->begin(18, -1, 23, -1);   // SCK=18, MISO=none, MOSI=23, CS=hardwired LOW
 ```
 
 ## Gotcha 6: Modem Cannot Sleep on USB-C Power

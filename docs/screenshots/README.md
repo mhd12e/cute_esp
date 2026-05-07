@@ -8,6 +8,8 @@ All screenshots originated as AliExpress listings captured 2026-04-20. They are 
 
 The main board. **Most important here are the pin diagrams (06–08) and the A7670E vs A7670G comparison (15, 19, 20)** — see [gotchas](../gotchas.md#gotcha-3-a7670e-vs-a7670g-critical-verification).
 
+> **Caveat about the marketing pin diagrams (06–08):** these were drawn by LILYGO for the AliExpress listing and may show GPIO 16 and GPIO 17 as if they were available on the headers. They are not — those pins are inside the ESP32-WROVER module driving the embedded PSRAM, and aren't broken out anywhere. The board schematic at [`../lilygo-reference/schematic/esp32/T-A7670X-V1.4.pdf`](../lilygo-reference/schematic/esp32/T-A7670X-V1.4.pdf) is the source of truth. See [gotchas](../gotchas.md#gotcha-gpio-16-and-17-are-psram-not-free).
+
 | File | Shows |
 |------|-------|
 | `01-aliexpress-listing.png` | Top of the AliExpress product page (price, version selector) |
