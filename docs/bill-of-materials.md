@@ -4,13 +4,15 @@
 
 ## Already Purchased (Total: AED 255.83)
 
-| # | Component | Specs | Price |
-|---|-----------|-------|:-----:|
-| 1 | LILYGO T-SIM A7670E R2 | ESP32 + 4G LTE Cat1 + Built-in GPS + SD slot + 18650 holder | AED 141.70 |
-| 2 | SOTAMIA Mini Speakers (2pcs) | 4Ω, 3W, full-range, 20×30mm | AED 9.46 |
-| 3 | MAX98357A I2S Amplifier (5pcs) | Class D, 3W output, mono | AED 3.75 |
-| 4 | 4.0" IPS SPI Display | ILI9488 + FT6236 capacitive touch, 480×320, 14-pin connector | AED 55.92 |
-| 5 | PL985525 LiPo Battery | 3.7V, 8000mAh, lithium polymer pouch | AED 45.00 |
+| # | Component | Specs | Price | Status |
+|---|-----------|-------|:-----:|:------:|
+| 1 | LILYGO T-SIM A7670E R2 | ESP32 + 4G LTE Cat1 + Built-in GPS + SD slot + 18650 holder | AED 141.70 | **In hand** |
+| 2 | SOTAMIA Mini Speakers (2pcs) | 4Ω, 3W, full-range, 20×30mm | AED 9.46 | **In hand** |
+| 3 | MAX98357A I2S Amplifier (5pcs) | Class D, 3W output, mono | AED 3.75 | **In hand** |
+| 4 | 4.0" IPS SPI Display | ILI9488 + FT6236 capacitive touch, 480×320, 14-pin connector | AED 55.92 | **In hand** |
+| 5 | PL985525 LiPo Battery | 3.7V, 8000mAh, lithium polymer pouch | AED 45.00 | ⏳ **Ordered, not yet arrived** |
+
+> **Things still to procure** (battery, micro SD, SIM, tools, perfboard, etc.) live on the [to-buy page](to-buy.md).
 
 Reference photos: see [`screenshots/lilygo-board/`](screenshots/lilygo-board/), [`screenshots/display/`](screenshots/display/), [`screenshots/speaker/`](screenshots/speaker/), [`screenshots/amplifier/`](screenshots/amplifier/).
 

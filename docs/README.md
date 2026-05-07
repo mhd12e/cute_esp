@@ -41,6 +41,7 @@ If you're new here, start with **[Story and purpose](story-and-purpose.md)** and
 - [Problems and solutions](problems-and-solutions.md) — every problem found in planning
 - [Gotchas](gotchas.md) — silent failures to watch for
 - [Open decisions](open-decisions.md) — what's still TBD
+- [To-buy list](to-buy.md) — items still to procure (battery, SD card, tools, etc.)
 
 ## Reference
 
